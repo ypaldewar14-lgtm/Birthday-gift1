@@ -1,0 +1,73 @@
+const TOTAL_PHOTOS = 10; // 👈 Change this number
+
+const surpriseBtn = document.getElementById("surpriseBtn");
+const balloonContainer = document.getElementById("balloon-container");
+const photoViewer = document.getElementById("photo-viewer");
+const romanticPhoto = document.getElementById("romantic-photo");
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+surpriseBtn.addEventListener("click", () => {
+  createBalloons(10);
+});
+
+function createBalloons(count) {
+  for (let i = 0; i < count; i++) {
+    const balloon = document.createElement("div");
+    balloon.classList.add("balloon");
+
+    balloon.style.left = random(0, 90) + "vw";
+    balloon.style.background = `hsl(${random(330,360)}, 80%, 70%)`;
+    balloon.style.animation = `float ${random(5,8)}s linear forwards`;
+
+    balloon.addEventListener("click", (e) => {
+      heartExplosion(e.clientX, e.clientY);
+      showRandomPhoto();
+      balloon.remove();
+    });
+
+    balloonContainer.appendChild(balloon);
+  }
+}
+
+/* Floating animation */
+const styleSheet = document.createElement("style");
+styleSheet.innerHTML = `
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-120vh); }
+}`;
+document.head.appendChild(styleSheet);
+
+/* Heart Explosion */
+function heartExplosion(x, y) {
+  for (let i = 0; i < 15; i++) {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+    heart.style.setProperty("--x", random(-100, 100) + "px");
+    heart.style.setProperty("--y", random(-100, 100) + "px");
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+}
+
+/* Show Random Photo */
+function showRandomPhoto() {
+  const randomIndex = Math.floor(Math.random() * TOTAL_PHOTOS) + 1;
+  romanticPhoto.src = `images/${randomIndex}.jpg`;
+  photoViewer.classList.remove("hidden");
+}
+
+/* Close photo on click */
+photoViewer.addEventListener("click", () => {
+  photoViewer.classList.add("hidden");
+});

@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #f8cdda, #fbc2eb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card {
+  background: rgba(255,255,255,0.9);
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 15px 40px rgba(255,0,100,0.3);
+  z-index: 10;
+}
+
+h1 {
+  color: #d6336c;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 25px;
+}
+
+#surpriseBtn {
+  width: 150px;
+  height: 50px;
+  background: #ff4d88;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#surpriseBtn:hover {
+  transform: scale(1.1);
+}
+
+/* Balloons */
+
+#balloon-container {
+  position: fixed;
+  bottom: -100px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.balloon {
+  position: absolute;
+  width: 50px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Heart Explosion */
+
+.heart {
+  position: absolute;
+  font-size: 22px;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  to {
+    transform: translate(var(--x), var(--y)) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Photo Viewer */
+
+#photo-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+#photo-viewer img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
+}
+
+.hidden {
+  display: none;
+}
